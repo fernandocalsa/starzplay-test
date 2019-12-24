@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Promo from "../Promo";
 
+const endpoint = process.env.REACT_APP_IMAGE_ENDPOINT;
+
 const Trending = () => {
   const [ imageUrl, setImageUrl ] = useState();
   useEffect(() => {
-    fetch('http://localhost:7000')
+    fetch(endpoint)
       .then(response => response.text())
       .then(url => setImageUrl(url));
   }, []);

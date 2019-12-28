@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from 'styled-components';
 import Layout from "../components/Layout";
 import Hero from "../components/Landing/Hero";
 import WeAre from "../components/Landing/WeAre";
@@ -12,13 +13,21 @@ import {
   TabDownload as Tab3
 } from "../components/Landing/Tabs";
 
-const tabsLayout = () => [
-  { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
-  { tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> },
-  { tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> }
-];
+const tabsLayout = (isMiniMode) => {
+  const tabs = [
+    { tabTitle: "Subscription", tabIcon: "user", tabContent: <Tab1 /> },
+  ];
+  if (!isMiniMode) {
+    tabs.push({ tabTitle: "Devices", tabIcon: "devices", tabContent: <Tab2 /> });
+  }
+  tabs.push({ tabTitle: "Download", tabIcon: "download", tabContent: <Tab3 /> });
+  return tabs;
+};
 
 const Landing = () => {
+  const themeContext = useContext(ThemeContext);
+  const tabs = tabsLayout(themeContext.miniMode);
+
   return (
     <>
       <Layout>
@@ -42,7 +51,7 @@ const Landing = () => {
           text="Get <strong>thousands</strong> of titles in your pocket"
           direction="start"
         />
-        <Tabs layout={tabsLayout()} />
+        <Tabs layout={tabs} />
       </Layout>
       <StickyBanner title="Start your free trial. Sign up with:" />
     </>

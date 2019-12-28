@@ -4,6 +4,7 @@ import {
   HeadingStyled,
   StickyBannerStyled
 } from "./styles/Styled";
+import HideOnMini from "../HideOnMini";
 
 function StickyBanner({ className, title }) {
   return (
@@ -28,13 +29,15 @@ function StickyBanner({ className, title }) {
         buttonType="primary"
         ariaLabel="Mobile"
       />
-      <ButtonStyled
-        label="Facebook"
-        icon="facebook"
-        buttonType={"primary"}
-        backgroundColor={"#4760a0"}
-        ariaLabel="Facebook"
-      />
+      <HideOnMini>
+        <ButtonStyled
+          label="Facebook"
+          icon="facebook"
+          buttonType={"primary"}
+          backgroundColor={"#4760a0"}
+          ariaLabel="Facebook"
+        />
+      </HideOnMini>
     </StickyBannerStyled>
   );
 }

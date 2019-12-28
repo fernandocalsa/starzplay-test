@@ -42,7 +42,7 @@ const List = ({
             </React.Fragment>
           ))
         : Object.keys(data).map(item => (
-            <LiStyled key={item} display={display}>
+            <LiStyled key={item} display={display} onClick={data[item].onClick}>
               {link ? (
                 <a
                   href={data[item].url || ""}

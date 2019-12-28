@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
+import React from "react";
 import FooterNav from "../FooterNav";
 import { FooterStyled, LogoStyled, AppLogosStyled } from "./styles/Styled";
+import HideOnMini from "../HideOnMini";
 
 function Footer() {
-  const themeContext = useContext(ThemeContext);
   const currentYear = new Date().getFullYear();
 
   return (
     <FooterStyled>
       <FooterNav />
-      {!themeContext.miniMode && <AppLogosStyled />}
+      <HideOnMini>
+        <AppLogosStyled />
+      </HideOnMini>
       <div>
         <small>© {currentYear}</small>
         <LogoStyled />

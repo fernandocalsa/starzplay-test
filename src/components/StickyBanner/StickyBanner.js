@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ButtonStyled,
   HeadingStyled,
   StickyBannerStyled
 } from "./styles/Styled";
+import { ThemeContext } from 'styled-components';
 
 function StickyBanner({ className, title }) {
+  const themeContext = useContext(ThemeContext);
   return (
     <StickyBannerStyled className={className}>
       {title && (
@@ -28,13 +30,13 @@ function StickyBanner({ className, title }) {
         buttonType="primary"
         ariaLabel="Mobile"
       />
-      <ButtonStyled
+      {!themeContext.miniMode && <ButtonStyled
         label="Facebook"
         icon="facebook"
         buttonType={"primary"}
         backgroundColor={"#4760a0"}
         ariaLabel="Facebook"
-      />
+      />}
     </StickyBannerStyled>
   );
 }

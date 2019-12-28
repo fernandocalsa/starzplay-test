@@ -4,11 +4,11 @@ import Landing from "./pages/Landing";
 import { starzLanding as Theme } from "./styles/starz-landing";
 import { Normalize } from "styled-normalize";
 import GlobalStyles from "./styles/global-styles";
-import { ThemeProvider } from "styled-components";
+import { MiniModeProvider } from "./styles/MiniModeToggle";
 
 ReactDOM.render(
-  <ThemeProvider theme={Theme}>
+  <MiniModeProvider>
     <Normalize />
     <GlobalStyles />
     <Landing />
-  </ThemeProvider>, document.getElementById("root"));
+  </MiniModeProvider>, document.getElementById("root"));

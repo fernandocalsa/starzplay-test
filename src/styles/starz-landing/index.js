@@ -12,5 +12,11 @@ export const starzLanding = {
   components,
   locale: {
     dir: "ltr"
-  }
+  },
+  miniMode: false,
+};
+
+export const starzLandingMini = {
+  ...starzLanding,
+  miniMode: true,
 };

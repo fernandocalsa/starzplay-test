@@ -3,6 +3,7 @@ import { Dropdown } from "../Dropdown";
 import Menu from "../Menu";
 import { Logo } from "../Logo";
 import { HeaderStyled, BurgerStyled, ListStyled } from "./styles/Styled";
+import { useMiniMode } from "../../styles/MiniModeToggle";
 
 function getLanguageSelectorItems() {
   return [
@@ -23,6 +24,7 @@ function getLanguageSelectorItems() {
 
 function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const miniModeToggle = useMiniMode();
 
   useEffect(() => {
     document.body.classList.toggle("noScrolling", isBurgerMenuOpen);
@@ -52,7 +54,8 @@ function Header() {
             toggleMiniMode: {
               text: "Toggle Mini Mode",
               url: "#",
-              role: "button"
+              role: "button",
+              onClick: () => miniModeToggle.toggle(),
             }
           }}
           link

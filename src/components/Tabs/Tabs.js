@@ -5,7 +5,8 @@ import {
   TabStyled,
   TabContentContainerStyled,
   IconStyled,
-  LabelStyled
+  LabelStyled,
+  LoadingMessage,
 } from "./styles/Styled";
 
 async function calculateTabToShow(tab) {
@@ -27,17 +28,26 @@ class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       selectedTab: props.selectedTab || 0
     };
   }
 
   handleClick = async (tab, index) => {
-    this.setState({ selectedTab: await calculateTabToShow(index) });
+    this.setState({
+      loading: true,
+    });
+    const selectedTab = await calculateTabToShow(index);
+    this.setState({
+      loading: false,
+      selectedTab,
+    });
     this.props.onTabSelected && this.props.onTabSelected(tab);
   };
 
   render() {
     const { layout, size } = this.props;
+    const { loading } = this.state;
     const TabContent = () => layout[this.state.selectedTab].tabContent;
     return (
       <TabsContainerStyled>
@@ -52,7 +62,8 @@ class Tabs extends Component {
             />
           ))}
         </TabListStyled>
-        <TabContentContainerStyled>
+        {loading && <LoadingMessage>Loading...</LoadingMessage>}
+        <TabContentContainerStyled loading={loading}>
           <TabContent />
         </TabContentContainerStyled>
       </TabsContainerStyled>

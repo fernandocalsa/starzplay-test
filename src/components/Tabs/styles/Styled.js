@@ -67,4 +67,12 @@ export const TabContentContainerStyled = styled.div`
   color:  ${props => props.theme.components.tabs.color};
   text-align: ${props => props.theme.components.tabs.align || "center"};
   padding: ${props => props.theme.components.tabs.padding};
+  transition: transform 0.3s ease-out;
+  transform-origin: top;
+  transform: scaleY(${props => props.loading ? 0 : 1});
+`;
+
+export const LoadingMessage = styled.div`
+  color: ${props => props.theme.color.white};
+  text-align: center;
 `;

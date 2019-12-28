@@ -32,8 +32,11 @@ class Tabs extends Component {
   }
 
   handleClick = async (tab, index) => {
-    this.setState({ selectedTab: await calculateTabToShow(index) });
+    this.setState({
+      selectedTab: index,
+    });
     this.props.onTabSelected && this.props.onTabSelected(tab);
+    await calculateTabToShow(index);
   };
 
   render() {

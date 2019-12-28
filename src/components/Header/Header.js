@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "styled-components";
 import { Dropdown } from "../Dropdown";
 import Menu from "../Menu";
 import { Logo } from "../Logo";
@@ -24,6 +25,7 @@ function getLanguageSelectorItems() {
 
 function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const themeContext = useContext(ThemeContext);
   const miniModeToggle = useMiniMode();
 
   useEffect(() => {
@@ -33,6 +35,24 @@ function Header() {
   function handleOpened() {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
   }
+
+  const exploreListItem = {
+    text: "Explore",
+    url: "#",
+    role: "link"
+  };
+
+  const toggleMiniModeListItem = {
+    text: "Toggle Mini Mode",
+    url: "#",
+    role: "button",
+    onClick: () => miniModeToggle.toggle(),
+  }
+  const navListItems = {};
+  if (!themeContext.miniMode) {
+    navListItems.explore = exploreListItem;
+  }
+  navListItems.toggleMiniMode = toggleMiniModeListItem;
 
   return (
     <HeaderStyled>
@@ -45,27 +65,15 @@ function Header() {
       <Logo />
       <nav>
         <ListStyled
-          data={{
-            explore: {
-              text: "Explore",
-              url: "#",
-              role: "link"
-            },
-            toggleMiniMode: {
-              text: "Toggle Mini Mode",
-              url: "#",
-              role: "button",
-              onClick: () => miniModeToggle.toggle(),
-            }
-          }}
+          data={navListItems}
           link
         />
-        <Dropdown
+        {!themeContext.miniMode && <Dropdown
           items={getLanguageSelectorItems()}
           icon={"languageGlobe"}
           optionsPosition={"center"}
           selectedItem={0}
-        />
+        />}
       </nav>
     </HeaderStyled>
   );

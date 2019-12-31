@@ -31,13 +31,17 @@ class Tabs extends Component {
       loading: false,
       selectedTab: props.selectedTab || 0
     };
+    this.cacheTabsToShow = {};
   }
 
   handleClick = async (tab, index) => {
     this.setState({
       loading: true,
     });
-    const selectedTab = await calculateTabToShow(index);
+    if (!this.cacheTabsToShow[index]) {
+      this.cacheTabsToShow[index] = await calculateTabToShow(index);
+    }
+    const selectedTab = this.cacheTabsToShow[index];
     this.setState({
       loading: false,
       selectedTab,
